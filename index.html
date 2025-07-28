@@ -368,6 +368,255 @@
             }
         }
 
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+        }
+
+        .chat-toggle svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 0 rgba(74, 124, 89, 0.7);
+            }
+            70% {
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 10px rgba(74, 124, 89, 0);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 0 rgba(74, 124, 89, 0);
+            }
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .chat-window.open {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h3 {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+            animation: slideInMessage 0.3s ease;
+        }
+
+        @keyframes slideInMessage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background: #f0f2f5;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: #f0f2f5;
+            padding: 12px 16px;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .typing-indicator.show {
+            display: block;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            30% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+        }
+
+        .chat-input {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #eee;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .chat-input input:focus {
+            border-color: #4a7c59;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .chat-notification {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 999;
+            max-width: 250px;
+            cursor: pointer;
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .chat-notification.show {
+            transform: translateX(0);
+        }
+
+        .chat-notification.hide {
+            transform: translateX(100%);
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -572,7 +821,7 @@
                         <span>✉️</span>
                         <div>
                             <strong>Email:</strong><br>
-                            amanah.services.uk@gmail.com
+                            amana.services.uk@gmail.com
                         </div>
                     </div>
                     <div class="contact-item">
@@ -645,7 +894,201 @@
         </div>
     </footer>
 
+    <!-- AI Chatbot Assistant -->
+    <div class="chatbot-container">
+        <button class="chat-toggle" onclick="toggleChat()" id="chatToggle">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+        </button>
+        
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h3>🤖 Amanah Assistant</h3>
+                <button class="chat-close" onclick="toggleChat()">&times;</button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    Hi there! 👋 Welcome to Amanah Office. My name is Abdullah! I'm here to help you with our services. How can I assist you today?
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Ask about our services..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Chatbot functionality
+        let isOpen = false;
+        const chatWindow = document.getElementById('chatWindow');
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        // Sample responses for Amanah Office services
+        const responses = {
+            'hello': 'Hello! Welcome to Amanah Office. How can I help you with our services today?',
+            'hi': 'Hi there! I\'m here to assist you with immigration, benefits, business services, and more. What do you need help with?',
+            'help': 'I can help you with information about our services: UK Immigration, Government Benefits, Business Services, Data Analysis, Travel, Translation, Education, and CV writing. What interests you?',
+            'immigration': 'We provide comprehensive UK immigration services including citizenship applications, permanent leave to remain, visa applications, and settlement support. Would you like to know more about any specific service?',
+            'citizenship': 'We assist with UK citizenship applications, including document preparation, form completion, and guidance through the entire process. Our experienced team ensures your application is submitted correctly.',
+            'benefits': 'We help with all UK government benefits including Child Benefit, Universal Credit, Housing Benefit, Tax Credits, and Disability Benefits. We can guide you through the application process.',
+            'business': 'Our business services include payroll management, self assessment tax returns, VAT returns, business registration, and financial record keeping. We also offer data analysis and Excel dashboard creation.',
+            'travel': 'We provide complete travel services including flight bookings, holiday packages, hotel accommodations, travel insurance, and visa support for international travel.',
+            'translation': 'We offer certified document translation, educational document verification, and apostille services. We also help with school registration and university applications.',
+            'cv': 'Our professional CV writing service includes cover letters, job application support, interview preparation, career guidance, and LinkedIn profile optimization.',
+            'contact': 'You can reach us at amana.services.uk@gmail.com, call +44 161 248 5697, or visit us at 47 Wilmslow Road, Manchester, M14 5TB. We\'re open Mon-Fri 9AM-6PM, Sat 10AM-4PM.',
+            'address': 'We\'re located at 47 Wilmslow Road, Manchester, M14 5TB. We\'re open Monday to Friday 9AM-6PM, Saturday 10AM-4PM, and closed on Sundays.',
+            'price': 'Our pricing varies depending on the service. Please contact us at amana.services.uk@gmail.com or call +44 161 248 5697 for a detailed quote tailored to your needs.',
+            'appointment': 'To book an appointment, please email us at amana.services.uk@gmail.com or call +44 161 248 5697. We\'ll be happy to schedule a consultation at your convenience.',
+            'default': 'That\'s a great question! For detailed information about our services, please contact us at amana.services.uk@gmail.com or call +44 161 248 5697. Our team will be happy to help you.'
+        };
+
+        function toggleChat() {
+            isOpen = !isOpen;
+            if (isOpen) {
+                chatWindow.classList.add('open');
+                messageInput.focus();
+                // Hide notification if open
+                const notification = document.querySelector('.chat-notification');
+                if (notification) {
+                    notification.remove();
+                }
+            } else {
+                chatWindow.classList.remove('open');
+            }
+        }
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            typingIndicator.classList.add('show');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            typingIndicator.classList.remove('show');
+        }
+
+        function getAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Check for keyword matches
+            for (const [key, response] of Object.entries(responses)) {
+                if (key !== 'default' && message.includes(key)) {
+                    return response;
+                }
+            }
+            
+            // Check for common patterns
+            if (message.includes('how much') || message.includes('cost') || message.includes('fee')) {
+                return responses.price;
+            }
+            if (message.includes('book') || message.includes('appointment') || message.includes('meeting')) {
+                return responses.appointment;
+            }
+            if (message.includes('where') || message.includes('location') || message.includes('manchester')) {
+                return responses.address;
+            }
+            if (message.includes('visa') || message.includes('passport')) {
+                return responses.immigration;
+            }
+            if (message.includes('tax') || message.includes('payroll') || message.includes('excel')) {
+                return responses.business;
+            }
+            if (message.includes('thank') || message.includes('thanks')) {
+                return 'You\'re very welcome! Is there anything else I can help you with regarding our services?';
+            }
+            if (message.includes('bye') || message.includes('goodbye')) {
+                return 'Thank you for visiting Amanah Office! Feel free to contact us anytime. Have a wonderful day! 👋';
+            }
+            
+            return responses.default;
+        }
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, true);
+            messageInput.value = '';
+
+            // Show typing indicator
+            showTyping();
+
+            // Simulate AI processing time
+            setTimeout(() => {
+                hideTyping();
+                const response = getAIResponse(message);
+                addMessage(response);
+            }, 1000 + Math.random() * 2000);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Auto-popup notification after page load
+        setTimeout(() => {
+            const notification = document.createElement('div');
+            notification.className = 'chat-notification';
+            notification.innerHTML = '💬 Hi! How can I help you today? Chat with me!';
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            notification.onclick = () => {
+                toggleChat();
+                notification.classList.add('hide');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 500);
+            };
+            
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+                if (notification.parentNode && !isOpen) {
+                    notification.classList.add('hide');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 500);
+                }
+            }, 8000);
+        }, 3000); // Show after 3 seconds
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
